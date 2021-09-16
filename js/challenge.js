@@ -34,6 +34,10 @@ function getDocHeight() {
 
 $(document).ready(function(){
 
+	if (document.cookie){
+		dt = DateTime.fromISO(document.cookie);
+	}
+
 	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
 		var element = $(generate_element(data, count));
 		$('#content').append(element);
@@ -42,7 +46,8 @@ $(document).ready(function(){
 
 	$('#selector').change(function(){
 		
-		
+		document.cookie = this.value;
+		location.reload();
 		
 	});
 
