@@ -9,7 +9,7 @@ function generate_element(data, count){
 				<div class="card shadow-sm">\
 					<img src='+data.url+' class="bd-placeholder-img card-img-top"/>\
 					<div class="card-body">\
-						<h1 class="card-title">data.title</h1>\
+						<h1 class="card-title">'+data.title+'</h1>\
 						<p class="card-text">'+data.explanation+'</p>\
 						<div class="d-flex justify-content-between align-items-center">\
 							<div class="btn-group">\
