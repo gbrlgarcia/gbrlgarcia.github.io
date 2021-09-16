@@ -37,6 +37,7 @@ $(document).ready(function(){
 
 	if (document.cookie){
 		dt = DateTime.fromISO(document.cookie);
+		document.cookie="";
 	}
 
 	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
