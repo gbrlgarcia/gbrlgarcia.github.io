@@ -36,6 +36,7 @@ function getDocHeight() {
 $(document).ready(function(){
 
 	if (document.cookie){
+		$('#selector').val(document.cookie);
 		dt = DateTime.fromISO(document.cookie);
 		document.cookie="";
 	}
