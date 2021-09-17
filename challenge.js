@@ -60,7 +60,7 @@ $(document).ready(function(){
 
 	var template = $(generate_template(count));
 	$('#content').append(template);
-	
+	insert_data(count);
 
 	$('#selector').change(function(){
 		
