@@ -79,7 +79,7 @@ $(document).ready(function(){
 });
 
 $(window).scroll(function() {
-		if($(window).scrollTop() + $(window).height() == getDocHeight()) {
+		if($(window).scrollTop() + $(window).height() >= getDocHeight()/2) {
 			var template = $(generate_template(count));
 			$('#content').append(template);
 			insert_data(count);
