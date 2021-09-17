@@ -7,7 +7,7 @@ function generate_template(count){
 		<div class="row pt-4">\
 			<div class="col-lg-6 mx-auto">\
 				<div id="media_container" class="card shadow-sm">\
-					<img id="img_url'+count+'" src="loading.gif" class="bd-placeholder-img card-img-top"/>\
+					<img id="media_url'+count+'" src="loading.gif" class="bd-placeholder-img card-img-top"/>\
 					<div class="card-body">\
 						<h2 id="title'+count+'" class="card-title fs-3"></h1>\
 						<p id="explanation'+count+'" class="card-text"></p>\
@@ -30,12 +30,12 @@ function insert_data(count){
 	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
 		
 		if (data.media_type=="image"{
-			$('#img_url'+count).attr("src",data.url);
+			$('#media_url'+count).attr("src",data.url);
 			
 		}
 		else if (data.media_type=="video"){
-			$('#img_url'+count).remove();
-			var video = $('<iframe width="727" height="409" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			$('#media_url'+count).remove();
+			var video = $('<iframe src="" id="media_url'+count'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 			$('#media_container').prepend(video);
 		}
 		
