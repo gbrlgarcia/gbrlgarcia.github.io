@@ -29,7 +29,7 @@ function insert_data(count){
 	
 	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
 		
-		if (data.media_type=="image"{
+		if (data.media_type=="image") {
 			$('#media_url'+count).attr("src",data.url);
 			
 		}
