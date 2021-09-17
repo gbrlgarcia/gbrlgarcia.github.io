@@ -9,7 +9,7 @@ function generate_element(data, count){
 				<div class="card shadow-sm">\
 					<img src='+data.url+' class="bd-placeholder-img card-img-top"/>\
 					<div class="card-body">\
-						<h1 class="card-title">'+data.title+'</h1>\
+						<h2 class="card-title fs-3">'+data.title+'</h1>\
 						<p class="card-text">'+data.explanation+'</p>\
 						<div class="d-flex justify-content-between align-items-center">\
 							<div class="btn-group">\
@@ -35,13 +35,7 @@ function getDocHeight() {
 
 $(document).ready(function(){
 
-	if (document.cookie){
-		$('#selector').val(document.cookie);
-		dt = DateTime.fromISO(document.cookie);
-		document.cookie="";
-	}
-
-	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
+	$.get("https://api.nasa.gov/planetary/apod?date="+dt.toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
 		var element = $(generate_element(data, count));
 		$('#content').append(element);
 		count ++;
@@ -49,9 +43,13 @@ $(document).ready(function(){
 
 	$('#selector').change(function(){
 		
-		document.cookie = this.value;
-		location.reload();
-		
+		$('#content').empty();
+		dt = DateTime.fromISO(this.value);
+		$.get("https://api.nasa.gov/planetary/apod?date="+dt.toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
+			var element = $(generate_element(data, count));
+			$('#content').append(element);
+			count = 1;
+		});
 	});
 
 });
