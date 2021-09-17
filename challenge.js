@@ -6,7 +6,7 @@ function generate_template(count){
 	return '\
 		<div class="row pt-4">\
 			<div class="col-lg-6 mx-auto">\
-				<div class="card shadow-sm">\
+				<div id="media_container" class="card shadow-sm">\
 					<img id="img_url'+count+'" src="loading.gif" class="bd-placeholder-img card-img-top"/>\
 					<div class="card-body">\
 						<h2 id="title'+count+'" class="card-title fs-3"></h1>\
@@ -29,7 +29,16 @@ function insert_data(count){
 	
 	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
 		
-		$('#img_url'+count).attr("src",data.url);
+		if (data.media_type=="image"{
+			$('#img_url'+count).attr("src",data.url);
+			
+		}
+		else if (data.media_type=="video"){
+			$('#img_url'+count).remove();
+			var video = $('<iframe width="727" height="409" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+			$('#media_container').prepend(video);
+		}
+		
 		$('#title'+count).val(data.title);
 		$('#explanation'+count).val(data.explanation);
 		$('#date'+count).val(data.date);
@@ -51,7 +60,7 @@ $(document).ready(function(){
 
 	var template = $(generate_template(count));
 	$('#content').append(template);
-	insert_data(count);
+	
 
 	$('#selector').change(function(){
 		
