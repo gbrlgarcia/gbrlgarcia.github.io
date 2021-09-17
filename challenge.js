@@ -2,20 +2,20 @@ var DateTime = luxon.DateTime;
 var dt = DateTime.now();
 var count = 0;
 
-function generate_element(data, count){
+function generate_template(count){
 	return '\
 		<div class="row pt-4">\
 			<div class="col-lg-6 mx-auto">\
 				<div class="card shadow-sm">\
-					<img src='+data.url+' class="bd-placeholder-img card-img-top"/>\
+					<img id="img_url'+count+'" src="loading.gif" class="bd-placeholder-img card-img-top"/>\
 					<div class="card-body">\
-						<h2 class="card-title fs-3">'+data.title+'</h1>\
-						<p class="card-text">'+data.explanation+'</p>\
+						<h2 id="title'+count+'" class="card-title fs-3"></h1>\
+						<p id="explanation'+count+'" class="card-text"></p>\
 						<div class="d-flex justify-content-between align-items-center">\
 							<div class="btn-group">\
 								<button id="like_button'+count+'" type="button" class="btn btn-sm btn-outline-secondary" onclick="toogle(this.id)">Like</button>\
 							</div>\
-							<small class="text-muted">'+data.date+'</small>\
+							<small id="date'+count+'" class="text-muted"></small>\
 						</div>\
 					</div>\
 				</div>\
@@ -24,6 +24,20 @@ function generate_element(data, count){
 	';
 	
 }
+
+function insert_data(count){
+	
+	$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
+		
+		$('#img_url'+count).attr("src",data.url);
+		$('#title'+count).val(data.title);
+		$('#explanation'+count).val(data.explanation);
+		$('#date'+count).val(data.date);
+		count ++;
+	});
+	
+}
+
 function getDocHeight() {
     var D = document;
     return Math.max(
@@ -35,32 +49,28 @@ function getDocHeight() {
 
 $(document).ready(function(){
 
-	$.get("https://api.nasa.gov/planetary/apod?date="+dt.toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
-		var element = $(generate_element(data, count));
-		$('#content').append(element);
-		count ++;
-	});
+	var template = $(generate_template(count));
+	$('#content').append(template);
+	insert_data(count);
 
 	$('#selector').change(function(){
 		
 		$('#content').empty();
 		dt = DateTime.fromISO(this.value);
-		$.get("https://api.nasa.gov/planetary/apod?date="+dt.toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
-			var element = $(generate_element(data, count));
-			$('#content').append(element);
-			count = 1;
-		});
+		count = 0;
+		var template = $(generate_template(count));
+		$('#content').append(template);
+		insert_data(count);
+		
 	});
 
 });
 
 $(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() == getDocHeight()) {
-			$.get("https://api.nasa.gov/planetary/apod?date="+dt.minus({ days: count }).toISODate()+"&api_key=46dTeV1tD7K07GNqTru5sklaZV8tOQV5tJYsNS1j",function(data,status){
-				var element = $(generate_element(data, count));
-				$('#content').append(element);
-				count ++;
-			});
+			var template = $(generate_template(count));
+			$('#content').append(template);
+			insert_data(count);
 		}
 	});
 
