@@ -45,7 +45,6 @@ function insert_content(c){
 		$('#explanation'+c).append(data.explanation);
 		$('#date'+c).append(data.date);
 		
-		count ++;
 	});
 	
 }
@@ -65,6 +64,7 @@ $(document).ready(function(){
 	$('#selector').val(DateTime.now().toISODate());
 
 	insert_content(count);
+	count ++;
 
 	$('#selector').change(function(){
 		
@@ -72,7 +72,7 @@ $(document).ready(function(){
 		dt = DateTime.fromISO(this.value);
 		count = 0;
 		insert_content(count);
-		
+		count ++;
 	});
 
 });
@@ -80,6 +80,7 @@ $(document).ready(function(){
 $(window).scroll(function() {
 		if($(window).scrollTop() + $(window).height() >= getDocHeight()) {
 				insert_content(count);
+				count ++;
 		}
 	});
 
