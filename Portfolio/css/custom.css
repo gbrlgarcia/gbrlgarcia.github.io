@@ -1,0 +1,90 @@
+
+body {
+	font-family: sans-serif;
+}
+
+#resume{
+	font-family: Century Gothic, Arial, sans-serif;
+}
+.nav-link{
+	color: white;
+	border-bottom: .25rem solid transparent;
+}
+
+.nav-link:hover,
+.nav-link:focus
+{
+	color: #3cc4b4;
+	border-bottom-color: #3cc4b4;
+}
+
+.logo{
+	color: white;
+	border-color: #3cc4b4;
+}
+
+.logo:hover,
+.logo:focus
+{
+	color:white;
+	background-color: #3cc4b4;
+}
+
+.main-button{
+	color: white;
+	background-color: #3cc4b4;
+}
+
+.my-name, .main-title{
+	color: #3cc4b4;
+	border-bottom: 2px solid transparent;
+}
+
+.my-name:hover{
+	border-bottom-color: #3cc4b4;
+}
+
+.section-title{
+	color: black;
+	border-bottom: .25rem solid #3cc4b4;
+
+}
+
+.resume-title{
+	color: black;
+}
+
+.card-body .list-group .list-group-item{
+	color: #3cc4b4;
+	border-color: #3cc4b4;
+}
+
+select{
+	background-color: transparent;
+	color: #3cc4b4;
+}
+
+option{
+	background-color: #262626;
+	color: #3cc4b4;
+}
+
+@media screen and (min-width: 600px) {
+	.rounded-custom{
+		border-radius: 1.5em;
+		
+	}
+}
+
+.carousel {
+  margin-bottom: 1rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 15rem;
+}

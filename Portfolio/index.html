@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Gabriel Garcia's Portfolio">
+    <meta name="author" content="Gabriel Garcia">
+
+    <title>Gabriel Garcia</title>
+		
+		<!-- Yes, I use Bootstrap for my CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		
+		<!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+		
+	</head>
+	
+	<body class="bg-dark h-100">
+    
+		<div class="container d-flex flex-column w-100 h-100">
+			<header class="mb-auto ps-3 pe-4 py-2">
+				
+					<div class="float-md-start d-flex justify-content-center">
+						<a href="index.html" class=" logo btn rounded rounded-circle btn-outline-dark border-2 p-2 fw-bold">GG</a>
+					</div>
+					<ul class="nav float-md-end pe-4 justify-content-center fw-bold">
+						<li><a href="resume.html" class="nav-link px-2">Resume</a></li>
+						<li><a href="work" class="nav-link px-2">Work</a></li>
+						<li><a href="references" class="nav-link px-2">References</a></li>
+						<li><a href="contact" class="nav-link px-2">Contact</a></li>
+					</ul>
+				
+			</header>
+		
+			<main class="d-flex align-items-center justify-content-center h-100">
+				<div class="row align-items-start justify-content-center">
+					<div class="col-md-6 mb-4 px-4">
+						<h1 class="main-title">Reponsive and Creative</h1>
+						<p class="pt-3 text-white">Hello, my name is <span class="my-name">Gabriel Garcia</span>. I'm a full-stack developer focused in producing efficient and good-looking applications. My mission is to provide responsive and creative solutions for your business needs. </p>
+						<p class="text-white">Select an <span class="my-name">animation</span> to show on the laptop screen:</p>
+						<a id="mission" class="btn logo" onclick="changeAnimation(this)">Mission</a>
+						<a id="fireworks" class="btn logo" onclick="changeAnimation(this)">Fireworks</a>
+						<a id="game" class="btn logo" onclick="changeAnimation(this)">Game</a>
+					</div>
+				
+					<div class="col-md-6 px-4">
+							<canvas id="canvas1" class="img-fluid"></canvas>
+					</div>
+				</div>
+			</main>
+		</div>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/fireworks2.js"></script>
+		<script src="js/mission2.js"></script>
+		<script src="js/game2.js"></script>
+		<script src="js/portfolio.js"></script>
+		
+		
+	</body>
+</html>
