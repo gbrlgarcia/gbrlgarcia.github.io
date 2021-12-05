@@ -22,26 +22,6 @@ function  getMousePos(canvas, evt) {
 			mouse.y = (evt.clientY - rect.top) * scaleY; 
 }
 
-canvas.addEventListener('click', (event) =>{
-	getMousePos(canvas, event);
-	messageUser = false;
-	if (selector=="fireworks"){
-		fire.createParticles();
-	}
-});
-
-canvas.addEventListener('mousemove', (event) =>{
-	getMousePos(canvas, event);
-	messageUser = false;
-	if (selector=="fireworks"){
-		fire.createParticles();
-	}
-});
-
-canvas.addEventListener('mouseleave', (event) =>{
-	messageUser = true;
-});
-
 let fire = new Fireworks();
 
 let mission = "My mission is to provide the best solution for your needs...";
@@ -50,7 +30,7 @@ let style = "white";
 let cursor = new Cursor(15,5);
 let box = new TextBox (160, 50, 50, cursor, mission, font);
 
-let game = new BallGame(5);
+let game = new BallGame(5,20);
 
 let frameIndex = 0, cursorFrameRate = 36, characterFrameRate = 2;
 
@@ -81,7 +61,19 @@ function animate(){
 			fire.increaseHue();
 			break;
 		case "game":
+			if (game.start == true){
+				game.ball.move();
+				if (frameIndex % 2){
+					game.handleCollisionBorder();
+					game.doTheTrick();
+				}
+			}
 			game.draw(style);
+			if (game.over){
+				ctx.font = "bold "+font;
+				ctx.fillStyle = "red";
+				ctx.fillText("GAME OVER",310, 280);
+			}
 			break;
 	}
 	
@@ -94,5 +86,38 @@ function changeAnimation(element){
 	if (element.id == "mission"){
 		box.charsToPrint = 0;
 	}
+	if (selector=="game"){
+		game.start = false;
+	}
 	selector = element.id;
 }
+
+canvas.addEventListener('click', (event) =>{
+	getMousePos(canvas, event);
+	messageUser = false;
+	if (selector=="fireworks"){
+		fire.createParticles();
+	}
+	if (selector=="game" && game.start == false){
+		game.start = true;
+		game.over = false;
+	}
+});
+
+canvas.addEventListener('mousemove', (event) =>{
+	getMousePos(canvas, event);
+	messageUser = false;
+	if (selector=="fireworks"){
+		fire.createParticles();
+	}
+	if (selector=="game"){
+		game.movePaddle(mouse.x);
+		if (!game.start){
+			game.moveBall(mouse.x);
+		}
+	}
+});
+
+canvas.addEventListener('mouseleave', (event) =>{
+	messageUser = true;
+});

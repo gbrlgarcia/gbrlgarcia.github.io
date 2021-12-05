@@ -18,6 +18,11 @@ body {
 	border-bottom-color: #3cc4b4;
 }
 
+.navbar-toggler{
+	color: white;
+	border-color:#3cc4b4;
+}
+
 .logo{
 	color: white;
 	border-color: #3cc4b4;
