@@ -11,9 +11,14 @@ body {
 	border-bottom: .25rem solid transparent;
 }
 
+
 .nav-link:hover,
 .nav-link:focus
 {
+	color: #3cc4b4;
+}
+
+.custom-active{
 	color: #3cc4b4;
 	border-bottom-color: #3cc4b4;
 }
@@ -64,15 +69,6 @@ body {
 	border-color: #3cc4b4;
 }
 
-select{
-	background-color: transparent;
-	color: #3cc4b4;
-}
-
-option{
-	background-color: #262626;
-	color: #3cc4b4;
-}
 
 @media screen and (min-width: 600px) {
 	.rounded-custom{
@@ -82,7 +78,7 @@ option{
 }
 
 .carousel {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .carousel-caption {
@@ -92,4 +88,8 @@ option{
 
 .carousel-item {
   height: 15rem;
+}
+
+footer{
+	z-index: 10;
 }

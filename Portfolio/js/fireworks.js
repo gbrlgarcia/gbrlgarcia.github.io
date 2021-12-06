@@ -1,55 +1,5 @@
-var canvas = document.getElementById('canvas1');
-var ctx = canvas.getContext('2d');
-var particlesArray = [];
-var hue = 0;
-
-canvas.width = 845;
-canvas.height = 609;
-
-var background = new Image();
-background.src = "white-laptop.png";
-
-const mouse = {
-  x: undefined,
-  y: undefined
-}
-
-function  getMousePos(canvas, evt) {
-  let rect = canvas.getBoundingClientRect(), // abs. size of element
-      scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
-      scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
-
-  return {
-    x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-    y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-  }
-}
-
-
-function sparks(event){
-	
-	let pos = getMousePos(canvas, event);
-	
-	if (pos.x >110 && pos.x<735 && pos.y>30 && pos.y<380){
-		mouse.x = pos.x;
-		mouse.y = pos.y;
-
-		for(let i=0; i<10; i++){
-			particlesArray.push(new Particle());
-		}
-	}
-}
-
-canvas.addEventListener('click', (event) =>{
-  sparks(event);
-});
-
-canvas.addEventListener('mousemove', (event) =>{
-	sparks(event);
-});
-
 class Particle{
-  constructor(){
+  constructor(hue){
     this.x = mouse.x;
     this.y = mouse.y;
     this.size = Math.random() * 5 + 2;
@@ -75,26 +25,29 @@ class Particle{
   
 }
 
-function handleParticles(){
-  for(let i=0; i<particlesArray.length; i++){
-    particlesArray[i].update();
-    particlesArray[i].draw();
-    if (particlesArray[i].size <= 0.3){
-      particlesArray.splice(i,1);
-      i--;
-    }
-  }
+class Fireworks{
+	constructor(){
+		this.particlesArray = [];
+		this.hue = 0;
+	}
+	handleParticles(){
+		for(let i=0; i<this.particlesArray.length; i++){
+			this.particlesArray[i].update();
+			this.particlesArray[i].draw();
+			if (this.particlesArray[i].size <= 0.3){
+				this.particlesArray.splice(i,1);
+				i--;
+			}
+		}
+	}
+	createParticles(){
+		if (mouse.x >110 && mouse.x<735 && mouse.y>30 && mouse.y<380){
+			for(let i=0; i<10; i++){
+				this.particlesArray.push(new Particle(this.hue));
+			}
+		}
+	}
+	increaseHue(){
+		this.hue++;
+	}
 }
-
-
-function animate(){
-  ctx.fillStyle = "#212529";
-  ctx.fillRect(0,0,canvas.width, canvas.height);
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-	
-  handleParticles();
-  hue++;
-  requestAnimationFrame(animate);
-}
-
-animate();

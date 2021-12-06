@@ -24,8 +24,8 @@ function  getMousePos(canvas, evt) {
 
 let fire = new Fireworks();
 
-let mission = "My mission is to provide the best solution for your needs...";
-let font = "30px sans-serif";
+let mission = "Hello and welcome to my world. \n This is a simple animation to show you some of my talents. \n Click the buttons to change the animation that shows up here...";
+let font = "25px sans-serif";
 let style = "white";
 let cursor = new Cursor(15,5);
 let box = new TextBox (160, 50, 50, cursor, mission, font);
@@ -53,8 +53,8 @@ function animate(){
 		
 		case "fireworks":
 			if (messageUser){
-				ctx.font = font;
-				ctx.fillStyle = style;
+				ctx.font = "30px sans-serif";
+				ctx.fillStyle = "white";
 				ctx.fillText("Move mouse pointer over here",210, 200);
 			}
 			fire.handleParticles();
@@ -63,16 +63,20 @@ function animate(){
 		case "game":
 			if (game.start == true){
 				game.ball.move();
-				if (frameIndex % 2){
-					game.handleCollisionBorder();
-					game.doTheTrick();
-				}
+				game.handleCollisionBorder();
+				game.doTheTrick();
+				game.adjustSpeed();
 			}
 			game.draw(style);
-			if (game.over){
-				ctx.font = "bold "+font;
+			if (game.win){
+				ctx.font = "bold 32px sans-serif";
+				ctx.fillStyle = "#3cc4b4";
+				ctx.fillText("YOU ARE THE WINNER!",235, 200);
+			}
+			else if (game.over){
+				ctx.font = "bold 32px sans-serif";
 				ctx.fillStyle = "red";
-				ctx.fillText("GAME OVER",310, 280);
+				ctx.fillText("GAME OVER",320, 280);
 			}
 			break;
 	}
