@@ -82,12 +82,12 @@ body {
 }
 
 .carousel-caption {
-  bottom: 3rem;
+  top: 3rem;
   z-index: 10;
 }
 
 .carousel-item {
-  height: 15rem;
+  height: 27rem;
 }
 
 footer{

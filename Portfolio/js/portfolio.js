@@ -24,8 +24,8 @@ function  getMousePos(canvas, evt) {
 
 let fire = new Fireworks();
 
-let mission = "Hello and welcome to my world. \n This is a simple animation to show you some of my talents. \n Click the buttons to change the animation that shows up here...";
-let font = "25px sans-serif";
+let mission = "My mission is to develop responsive and creative solutions for all kinds of business needs, while producing scalable and reusable blocks of code.";
+let font = "28px sans-serif";
 let style = "white";
 let cursor = new Cursor(15,5);
 let box = new TextBox (160, 50, 50, cursor, mission, font);
@@ -55,7 +55,7 @@ function animate(){
 			if (messageUser){
 				ctx.font = "30px sans-serif";
 				ctx.fillStyle = "white";
-				ctx.fillText("Move mouse pointer over here",210, 200);
+				ctx.fillText("Click, hover or tap here",260, 200);
 			}
 			fire.handleParticles();
 			fire.increaseHue();
